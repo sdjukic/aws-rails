@@ -3,17 +3,19 @@ class UserResourcesController < ApplicationController
 
   def new
 
-  	@current_user = User.find(1)
-  	@user = User.find(1)
-  	user_id = 1
+  	@current_user = User.find(2)
+  	@user = User.find(2)
+  	user_id = 2
     @user_resource = @current_user.user_resources.new
   
   	@s3_direct_post = S3_BUCKET.presigned_post(key: "uploads/#{user_id}/${filename}", success_action_status: 201, acl: :public_read)
 
   end
 
+  # have to check whether file already exists in AWS it has to be unique to be saved, but AWS does
+  # not return appropriate error code when I try to save file that is already there!
   def create
-  	@current_user = User.find(1)
+  	@current_user = User.find(2)
   	puts user_resource_params
   	@user_resource = @current_user.user_resources.create(user_resource_params)
   	

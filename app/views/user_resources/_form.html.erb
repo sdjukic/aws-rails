@@ -82,14 +82,14 @@
                   var input = $("<input />", { type:'hidden', name: fileInput.attr('name'), value: url } );
                   form.append(input);
               },
-                  fail: function(e, data) {
-                      submitButton.prop('disabled', false);
+              fail: function(e, data) {
+                  submitButton.prop('disabled', false);
 
-                      progressBar.
-                          css("background", "red").
-                          text("Failed");
-                  }
-              });
+                  progressBar.
+                      css("background", "red").
+                      text("Failed");
+              }
+            });
           });
       });
   </script>
