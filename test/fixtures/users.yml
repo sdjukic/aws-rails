@@ -1,0 +1,14 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  avatar_url: MyString
+
+slav:
+  name: "Slavisa Djukic"
+  avatar_url: "www.example.com/my_avatar"
+
+two:
+  name: MyString
+  avatar_url: MyString
+

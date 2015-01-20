@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  resource_url: MyString
+  resource_size: 1
+  user_id: slav
+  resource_name: resource
+
+two:
+  resource_url: MyString
+  resource_size: 1
+  user_id: slav
+  resource_name: resource
+
+three:
+  resource_url: MyString
+  resource_size: 1
+  user_id: slav
+  resource_name: resource
