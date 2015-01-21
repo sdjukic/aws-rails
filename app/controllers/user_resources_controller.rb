@@ -16,9 +16,9 @@ class UserResourcesController < ApplicationController
   # not return appropriate error code when I try to save file that is already there!
   def create
   	@current_user = User.find(2)
-  	puts user_resource_params
+
   	@user_resource = @current_user.user_resources.create(user_resource_params)
-  	
+    
   	respond_to do |format|
 
       if @user_resource.save
@@ -39,13 +39,15 @@ class UserResourcesController < ApplicationController
   end
 
   def user_resource_params
+    @current_user = User.find(2)
+
+    puts "Params in user_resource"
+    puts params['user_resource']['resource_url']
+    #user_file = S3_BUCKET.objects.find {|obj| obj.key == "uploads/2/#{@user_resource['resource_name']}" }
     numeric_value = { 'resource_size' => params['user_resource']['resource_size'].to_i}
     params['user_resource'].merge!(numeric_value)
     params.require(:user_resource).permit(:resource_name, :resource_url, :resource_size)
   end
 
-  def used_space 
-
-  end
 
 end

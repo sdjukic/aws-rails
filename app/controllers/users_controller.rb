@@ -19,19 +19,16 @@ class UsersController < ApplicationController
   def show
     @user = User.find(params[:id])
     @user_resources = @user.user_resources
-    #s3 = AWS::S3.new
+    
+    bucket_objects = []
+    file_name = 'uploads/1/Gru-StaraSkola,novaSkola.ogg'
+    
 
-    #bucket_objects = []
     #S3_BUCKET.objects.each do |obj|
-    #    bucket_objects.push(obj.key)
+    #    bucket_objects.push({key: obj.key, size: obj.content_length})
     #end
-    #user_objects = bucket_objects.grep /uploads\/#{params[:id]}/
-    #@file_names = []
-    #user_objects.each do |u| 
-    #    temp = u.split('/')
-    #    @file_names.push(temp.last)
-    #end
-
+    user_objects = bucket_objects.grep /uploads\/#{params[:id]}/
+  
   end
 
   # GET /users/new
