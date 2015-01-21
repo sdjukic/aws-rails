@@ -6,7 +6,7 @@ require 'aws-sdk'
 class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy]
 
-  @@SPACE_AVAILABLE = 1000000.0
+  @@SPACE_AVAILABLE = 45000.0
   
   # GET /users
   # GET /users.json
@@ -54,7 +54,14 @@ class UsersController < ApplicationController
     @user_resources = UserResource.where("user_id = #{params[:id]}")
     space_used = @user_resources.map { |r| r[:resource_size] }.reduce(:+)
     @percent_used = space_used / @@SPACE_AVAILABLE
-    puts @percent_used
+    if @percent_used < 45
+      @pie_color = "#0ff01e"
+    elsif @percent_used < 80
+      @pie_color = "#eef00f"
+    else
+      @pie_color = "#f00f31"
+    end
+      
   end
 
   # POST /users
