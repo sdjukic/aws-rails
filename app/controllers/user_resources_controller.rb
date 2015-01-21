@@ -30,12 +30,6 @@ class UserResourcesController < ApplicationController
     end
   
   end
-  
-  def edit
-  	@current_user = User.find(params[:id])
-  	@user_resources = UserResource.where("user_id = #{params[:id]}")
-
-  end
 
   def destroy
 
@@ -46,6 +40,10 @@ class UserResourcesController < ApplicationController
     numeric_value = { 'resource_size' => params['user_resource']['resource_size'].to_i}
     params['user_resource'].merge!(numeric_value)
     params.require(:user_resource).permit(:resource_name, :resource_url, :resource_size)
+  end
+
+  def used_space 
+
   end
 
 end
