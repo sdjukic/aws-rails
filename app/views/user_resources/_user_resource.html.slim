@@ -1,5 +1,6 @@
 
-    li id = "micropost-#{user_resource.id}"
+    li id = "resource-#{user_resource.id}" 
+      span class = "#{user_resource.file_extension}"
       = user_resource.resource_name
       |  
       = user_resource.resource_size

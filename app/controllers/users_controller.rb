@@ -6,7 +6,7 @@ require 'aws-sdk'
 class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy]
 
-  @@SPACE_AVAILABLE = 45000.0
+  @@SPACE_AVAILABLE = 10000000.0 
   
   # GET /users
   # GET /users.json
@@ -20,15 +20,6 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     @user_resources = @user.user_resources
     
-    bucket_objects = []
-    file_name = 'uploads/1/Gru-StaraSkola,novaSkola.ogg'
-    
-
-    #S3_BUCKET.objects.each do |obj|
-    #    bucket_objects.push({key: obj.key, size: obj.content_length})
-    #end
-    user_objects = bucket_objects.grep /uploads\/#{params[:id]}/
-  
   end
 
   # GET /users/new
@@ -50,7 +41,7 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     @user_resources = UserResource.where("user_id = #{params[:id]}")
     space_used = @user_resources.map { |r| r[:resource_size] }.reduce(:+)
-    @percent_used = space_used / @@SPACE_AVAILABLE
+    @percent_used = (space_used / @@SPACE_AVAILABLE) * 100
     if @percent_used < 45
       @pie_color = "#0ff01e"
     elsif @percent_used < 80
