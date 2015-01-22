@@ -13,7 +13,6 @@ class UserResource < ActiveRecord::Base
   def file_extension
     if self['resource_name']
   	  extension = self['resource_name'].match(/(\w+)$/).to_s
-      puts "Das extension est #{extension}"
       puts AUDIO_EXTENSIONS.include? extension
       if AUDIO_EXTENSIONS.include? extension
         #resource_icon = 'fa fa-file-audio-o fa-2x'
@@ -28,4 +27,13 @@ class UserResource < ActiveRecord::Base
       resource_icon
     end
   end
+
+  def file_url
+    address = ''
+    if self['resource_name']
+      address = 'https://s3.amazonaws.com/' + S3_BUCKET + self['resource_url']
+    end
+    address
+  end
+  
 end

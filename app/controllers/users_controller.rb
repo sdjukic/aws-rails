@@ -20,6 +20,8 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     @user_resources = @user.user_resources
     
+    @avatar_url = 'https://s3.amazonaws.com/' + BUCKET_NAME + "/uploads/#{params[:id]}/user_avatar"
+
     @new_resource = @user.user_resources.new
     @s3_direct_post = S3_BUCKET.presigned_post(key: "uploads/#{params[:id]}/${filename}", success_action_status: 201, acl: :public_read)
 
