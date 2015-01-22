@@ -1,0 +1,51 @@
+
+p id="notice"
+  = notice
+
+h1
+  strong Name:
+  |  
+  = @user.name
+
+h3
+  strong Avatar url:
+  |
+  = @user.avatar_url
+
+div class="col-md-8"
+
+  div class="add-resource"
+    | Placeholder for creating a textual post
+    span class ='user fa fa-upload fa-2x'
+    div class="upload-form"
+      = render 'resource_form' 
+
+- if @user_resources.any?
+      
+      h3 
+        | Number of Files (
+        | 
+        = @user.user_resources.count 
+        | )
+
+      span class = 'icono icono-folder' 
+      ul class="resources" 
+        = render @user_resources 
+- else 
+     span class = 'icono icono-folder' 
+  
+	
+
+
+= link_to 'Edit', edit_user_path(@user) 
+'  |
+= link_to 'Back', users_path
+
+javascript:
+  $(function (){
+    var form = $('.upload-form');
+    form.hide();
+    $('.fa-upload').on('click', function() {
+      form.toggle(); 
+    } );
+  })

@@ -11,6 +11,7 @@ class UserResource < ActiveRecord::Base
   validates_inclusion_of :resource_size, :in => 1..4000000, :message => "Can be between 0 and 4MB"
 
   def file_extension
+    if self['resource_name']
   	  extension = self['resource_name'].match(/(\w+)$/).to_s
       puts "Das extension est #{extension}"
       puts AUDIO_EXTENSIONS.include? extension
@@ -25,5 +26,6 @@ class UserResource < ActiveRecord::Base
         resource_icon = 'icono icono-file'
       end
       resource_icon
+    end
   end
 end

@@ -1,3 +1,12 @@
 // Place all the styles related to the users controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+.add-resource{
+	border-style: groove;
+	.user{
+	  color: #b8b894;
+	  display: block;
+	  cursor: pointer;
+	}
+}
