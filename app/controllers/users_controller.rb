@@ -40,7 +40,7 @@ class UsersController < ApplicationController
   def edit
     @user = User.find(params[:id])
     @user_resources = UserResource.where("user_id = #{params[:id]}")
-    space_used = @user_resources.map { |r| r[:resource_size] }.reduce(:+)
+    space_used = @user_resources.map { |r| r[:resource_size] }.reduce(:+) || 0
     @percent_used = (space_used / @@SPACE_AVAILABLE) * 100
     if @percent_used < 45
       @pie_color = "#0ff01e"

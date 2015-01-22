@@ -1,24 +1,22 @@
 - provide(:title, "Edit User")
 h1 Edit your resources
 
-h3 Select file to be deleted from your cloud
 
 = form_for(@user) do |user_form|
 
+  h2 User Name
+  div class = "as-block"
+    = user_form.text_field :name
 
-  = user_form.text_field :name
+  h3 Select file to be deleted from your cloud
 
   = user_form.fields_for :user_resources do |resource_fields|
-    = resource_fields.check_box :_destroy
+    div class = "as-block"
+      = resource_fields.check_box :_destroy
     
-    = resource_fields.text_field :resource_name
+      = resource_fields.text_field :resource_name
 
   = user_form.submit "Submit", class: "btn btn-primary"
-
-
-
-= link_to 'Show', @user 
-= link_to 'Back', users_path 
 
 
 h2 Space used
@@ -26,6 +24,12 @@ h2 Space used
 div class="chart" data-percent="#{@percent_used}" 
   = @percent_used 
   | %
+
+
+= link_to 'Show', @user 
+'  |
+= link_to 'Back', users_path 
+
 
 javascript:
   $(function(){

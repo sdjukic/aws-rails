@@ -15,11 +15,14 @@ class UserResource < ActiveRecord::Base
       puts "Das extension est #{extension}"
       puts AUDIO_EXTENSIONS.include? extension
       if AUDIO_EXTENSIONS.include? extension
-        resource_icon = 'fa fa-file-audio-o fa-2x'
+        #resource_icon = 'fa fa-file-audio-o fa-2x'
+        resource_icon = 'icono icono-music'
       elsif TEXT_EXTENSIONS.include? extension
-        resource_icon = 'fa fa-file-text fa-2x'
+        #resource_icon = 'fa fa-file-text fa-2x'
+        resource_icon = 'icono icono-document'
       else
-        resource_icon = 'fa fa-file-o fa-2x'
+        #resource_icon = 'fa fa-file-o fa-2x'
+        resource_icon = 'icono icono-file'
       end
       resource_icon
   end
