@@ -16,9 +16,10 @@ class UserResourcesController < ApplicationController
   # have to check whether file already exists in AWS it has to be unique to be saved, but AWS does
   # not return appropriate error code when I try to save file that is already there!
   def create
-  	@current_user = User.find(2)
+  	user_id = params['user_resource']['resource_url'].match(/\/\d+\//).to_s[1..-2].to_i
+    @current_user = User.find(user_id)
 
-    @user_resources = UserResource.where("user_id = 2")
+    @user_resources = UserResource.where("user_id = #{user_id}")
     space_used = @user_resources.map { |r| r[:resource_size] }.reduce(:+) || 0
     space_used += params['user_resource']['resource_size'].to_i
   
@@ -39,7 +40,6 @@ class UserResourcesController < ApplicationController
       # since object has been already uploaded, we have to delete it from the bucket
       file_name = params['user_resource']['resource_url'].match /uploads.*/
       S3_BUCKET.objects.find { |obj| obj.key == "#{file_name}" }.delete
-      #S3_BUCKET.delete(file_name)
       redirect_to @current_user, notice: "Total user space exceeded."
     end
   
@@ -51,7 +51,7 @@ class UserResourcesController < ApplicationController
   end
 
   def user_resource_params
-    @current_user = User.find(2)
+    
     file_name = params['user_resource']['resource_url'].match /uploads.*/
     
     file_size = S3_BUCKET.objects.find { |obj| obj.key == "#{file_name}" }.content_length
