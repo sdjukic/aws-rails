@@ -18,8 +18,9 @@ class UsersController < ApplicationController
   # GET /users/1.json
   def show
     @no_users = User.count()
-
-    @user = User.find(params[:id])
+  
+    # why do I have this if set_user does the same thing?!
+    #@user = User.find_by(id: params[:id])
   
     @user_resources = @user.user_resources
     
@@ -46,7 +47,6 @@ class UsersController < ApplicationController
 
   # GET /users/1/edit
   def edit
-    @user = User.find(params[:id])
     @user_resources = UserResource.where("user_id = #{params[:id]}")
     space_used = @user_resources.map { |r| r[:resource_size] }.reduce(:+) || 0
     @percent_used = (space_used / @@SPACE_AVAILABLE) * 100
@@ -66,11 +66,6 @@ class UsersController < ApplicationController
     @user = User.new(user_params)
 
     respond_to do |format|
-      puts "What are our parameters"
-      puts user_params
-      puts "Format is:"
-      puts format
-
       if @user.save
         format.html { redirect_to @user, notice: 'User was successfully created.' }
         format.json { render :show, status: :created, location: @user }
@@ -118,11 +113,9 @@ class UsersController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_user
-      begin
-        @user = User.find(params[:id])
-      rescue
-        render to: proc { [404, {}, ['']] } 
-       end
+      puts "In set user"
+      @user = User.find_by(id: params[:id])
+      redirect_to '/' unless @user
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

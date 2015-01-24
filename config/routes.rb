@@ -1,8 +1,12 @@
 Rails.application.routes.draw do
   get 'user_resources/new'
 
-  resources :users
+  
+  resources :users 
+
   resources :user_resources
+  
+  
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
