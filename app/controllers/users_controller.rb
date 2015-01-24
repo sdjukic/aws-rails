@@ -17,7 +17,10 @@ class UsersController < ApplicationController
   # GET /users/1
   # GET /users/1.json
   def show
+    @no_users = User.count()
+
     @user = User.find(params[:id])
+  
     @user_resources = @user.user_resources
     
     @avatar_url = 'https://s3.amazonaws.com/' + BUCKET_NAME + "/uploads/#{params[:id]}/user_avatar"
@@ -115,7 +118,11 @@ class UsersController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_user
-      @user = User.find(params[:id])
+      begin
+        @user = User.find(params[:id])
+      rescue
+        render to: proc { [404, {}, ['']] } 
+       end
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

@@ -4,9 +4,9 @@ class UserResourcesController < ApplicationController
 
   def new
 
-  	@current_user = User.find(2)
-  	@user = User.find(2)
-  	user_id = 2
+  	#@current_user = User.find(2)
+  	#@user = User.find(2)
+  	#user_id = 2
     @user_resource = @current_user.user_resources.new
   
   	@s3_direct_post = S3_BUCKET.presigned_post(key: "uploads/#{user_id}/${filename}", success_action_status: 201, acl: :public_read)
