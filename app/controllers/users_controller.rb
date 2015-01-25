@@ -107,6 +107,10 @@ class UsersController < ApplicationController
     end
   end
 
+  def missing_page
+    render :file => "/public/404.html", layout: false, status: 404 and return
+  end
+  
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_user
@@ -121,8 +125,6 @@ class UsersController < ApplicationController
       params.require(:user).permit(:name, :avatar_url, user_resources_attributes: [:id, :resource_name, :resource_url, :resource_size, :_destroy])
     end
 
-    def missing_page
-      render :file => "/public/404.html", layout: false, status: 404 and return
-    end
+    
 
 end
