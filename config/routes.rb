@@ -3,8 +3,10 @@ Rails.application.routes.draw do
 
   
   resources :users 
-
   resources :user_resources
+
+  # handle all non-existing routes with 404 page
+  get '*path', controller: 'users', :action => 'missing_page'
   
   
   # The priority is based upon order of creation: first created -> highest priority.

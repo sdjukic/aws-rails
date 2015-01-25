@@ -19,9 +19,6 @@ class UsersController < ApplicationController
   def show
     @no_users = User.count()
   
-    # why do I have this if set_user does the same thing?!
-    #@user = User.find_by(id: params[:id])
-  
     @user_resources = @user.user_resources
     
     @avatar_url = 'https://s3.amazonaws.com/' + BUCKET_NAME + "/uploads/#{params[:id]}/user_avatar"
@@ -115,11 +112,17 @@ class UsersController < ApplicationController
     def set_user
       puts "In set user"
       @user = User.find_by(id: params[:id])
-      redirect_to '/' unless @user
+      #redirect_to '/' unless @user
+      missing_page unless @user
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def user_params
       params.require(:user).permit(:name, :avatar_url, user_resources_attributes: [:id, :resource_name, :resource_url, :resource_size, :_destroy])
     end
+
+    def missing_page
+      render :file => "/public/404.html", layout: false, status: 404 and return
+    end
+
 end
