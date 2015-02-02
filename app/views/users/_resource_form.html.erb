@@ -5,9 +5,7 @@
     <%= f.label :resource_url %><br>
     <%= f.file_field :resource_url %>
   </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
+  
   <script>
   
       $(function() {
@@ -81,6 +79,8 @@
                   // create hidden field
                   var input = $("<input />", { type:'hidden', name: fileInput.attr('name'), value: url } );
                   form.append(input);
+                  console.log("Press submit button!");
+                  form.submit();
               },
               fail: function(e, data) {
                   submitButton.prop('disabled', false);

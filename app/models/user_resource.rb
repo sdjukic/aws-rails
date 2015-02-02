@@ -1,6 +1,7 @@
 class UserResource < ActiveRecord::Base
   
   AUDIO_EXTENSIONS = ['mp3', 'aac', 'flac', 'm4a', 'wav', 'ogg']
+  IMAGE_EXTENSIONS = ['png', 'jpg']
   TEXT_EXTENSIONS = ['pdf', 'txt', 'doc']
   
   belongs_to :user
@@ -20,6 +21,8 @@ class UserResource < ActiveRecord::Base
       elsif TEXT_EXTENSIONS.include? extension
         #resource_icon = 'fa fa-file-text fa-2x'
         resource_icon = 'icono icono-document'
+      elsif IMAGE_EXTENSIONS.include? extension
+        resource_icon = 'icono icono-image'
       else
         #resource_icon = 'fa fa-file-o fa-2x'
         resource_icon = 'icono icono-file'
@@ -31,7 +34,7 @@ class UserResource < ActiveRecord::Base
   def file_url
     address = ''
     if self['resource_name']
-      address = 'https://s3.amazonaws.com/' + S3_BUCKET + self['resource_url']
+      address = '//s3.amazonaws.com/' + BUCKET_NAME + "/uploads/#{self['user_id']}/#{self['resource_name']}"
     end
     address
   end

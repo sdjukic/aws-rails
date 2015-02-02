@@ -36,10 +36,6 @@ GEM
     bootstrap-sass (3.3.1.0)
       sass (~> 3.2)
     builder (3.2.2)
-    byebug (3.5.1)
-      columnize (~> 0.8)
-      debugger-linecache (~> 1.2)
-      slop (~> 3.6)
     celluloid (0.16.0)
       timers (~> 4.0.0)
     coderay (1.1.0)
@@ -50,8 +46,6 @@ GEM
       coffee-script-source
       execjs
     coffee-script-source (1.8.0)
-    columnize (0.8.9)
-    debugger-linecache (1.2.0)
     erubis (2.7.0)
     execjs (2.2.2)
     faker (1.4.3)
@@ -208,7 +202,6 @@ DEPENDENCIES
   aws-sdk
   bcrypt
   bootstrap-sass
-  byebug
   coffee-rails (~> 4.0.0)
   execjs
   faker
