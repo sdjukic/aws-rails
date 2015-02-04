@@ -30,6 +30,8 @@ class UsersController < ApplicationController
 
   # GET /users/new
   def new
+    puts "There are #{User.count} users."
+    redirect_to '/' if User.count > 2
     @user = User.new
     if User.last
       user_id = User.last.id + 1

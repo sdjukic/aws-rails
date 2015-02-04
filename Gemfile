@@ -15,6 +15,7 @@ gem 'rails-html-sanitizer'
 gem 'sdoc', '~> 0.4.0',          group: :doc
 gem 'slim-rails'
 gem 'aws-sdk'
+gem 'panda', '~>1.6.0'
 gem 'execjs'
 gem 'therubyracer'
 
